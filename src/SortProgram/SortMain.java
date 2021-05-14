@@ -6,8 +6,9 @@ import java.util.Scanner;
 
 import FileManager.AssistantFileManager;
 import FileManager.FileManager;
+import TypeConverter.TypeConverter;
 
-public class Sort {
+public class SortMain {
     public static Scanner readFile(AssistantFileManager asFM, String fileName){
         return asFM.readFile(fileName);
     }
@@ -16,7 +17,7 @@ public class Sort {
         asFM.writeFile("result1.txt", result);
     }
 
-    public static String getData(Scanner readFile){
+    public static String getData(TypeConverter tCon, Scanner readFile){
         int readLine = Integer.parseInt(readFile.nextLine());
         
         String getLine = "";
@@ -31,7 +32,13 @@ public class Sort {
 
             getLine = readFile.nextLine();
             splitLine = getLine.split(" ");
-            
+            convertSplitLine = tCon.convertToInt(splitLine);
+
+            for (int j = 0; j < convertSplitLine.length; j++){
+                System.out.print(convertSplitLine[j] + " ");
+
+            }
+            System.out.println();
         }
 
         String result = "";
@@ -39,15 +46,11 @@ public class Sort {
     }
 
     public static void main(String[] args) {
-        File file = null;
-        
-        Scanner fileReader = null;
-        FileWriter fileWriter = null;
-
         AssistantFileManager mFM = new AssistantFileManager();
+        TypeConverter mTCon = new TypeConverter();
 
-        fileReader = readFile(mFM, "data1.txt");
-        String getData = getData(readFile(mFM, "data1.txt"));
+        Scanner fileReader = readFile(mFM, "data1.txt");
+        String getData = getData(mTCon, readFile(mFM, "data1.txt"));
         writeFile(mFM, getData);
     }
 }

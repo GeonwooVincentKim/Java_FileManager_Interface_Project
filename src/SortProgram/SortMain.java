@@ -21,6 +21,9 @@ public class SortMain {
         String splitLine[] = null;
         int []convertSplitLine = null;
 
+        String result = "";
+        int sum = 0;
+
         for (int i = 1; i <= readLine; i++){
             if(!readFile.hasNextLine()){
                 System.out.println("No more readable lines!!!");
@@ -32,13 +35,15 @@ public class SortMain {
             convertSplitLine = tCon.convertToInt(splitLine);
 
             for (int j = 0; j < convertSplitLine.length; j++){
-                System.out.print(convertSplitLine[j] + " ");
-                
+                if(j % readLine != 0){
+                    sum += j;
+                }
             }
-            System.out.println();
+            
+            result += "#" + i + " : " + sum + "\n";
         }
-
-        String result = "";
+        
+        System.out.println(result);
         return result;
     }
 
